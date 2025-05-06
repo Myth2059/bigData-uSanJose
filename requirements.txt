@@ -1,0 +1,18 @@
+# Librerías principales
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+
+# Jupyter para notebooks interactivos
+jupyter
+
+# Visualización avanzada (opcional)
+plotly
+
+# Para guardar y cargar modelos
+joblib
+
+# (opcional) Tratamiento de fechas avanzado
+python-dateutil

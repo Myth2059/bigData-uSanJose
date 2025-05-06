@@ -1,0 +1,92 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+.env/
+.ENV/
+env.bak/
+venv.bak/
+
+# Jupyter runtime
+~/.local/share/jupyter/runtime/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Environment files
+*.env
+*.env.*
+
+# Data files (puedes subir solo ejemplos en /data/example/)
+*.csv
+*.tsv
+*.xls
+*.xlsx
+*.json
+*.parquet
+*.h5
+*.pkl
+*.joblib
+*.sav
+*.db
+
+# Modelos y salidas grandes
+*.h5
+*.pt
+*.pth
+*.onnx
+*.pb
+*.tflite
+*.log
+*.npy
+*.npz
+
+# Datasets y salidas pesadas
+/data/
+!/data/example.csv  # si quieres mantener uno de muestra
+
+# Compilación Cython
+*.c
+*.so
+
+# Archivos de logs y análisis temporales
+*.log
+*.tmp
+
+# Archivos de notebooks exportados
+*.html
+*.pdf
+
+# Archivos de test coverage
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+*.cover
+.cache
+nosetests.xml
+test-results.xml
+junit-*.xml
+
+# pyproject/build
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# pipenv/poetry
+Pipfile.lock
+poetry.lock
