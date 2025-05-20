@@ -22,7 +22,6 @@ Este proyecto tiene como objetivo explorar, limpiar y analizar datos recolectado
 | `entrenamiento.py`   | Entrenamiento del modelo de machine learning.                              |
 | `predictor.py`       | Carga el modelo entrenado y permite hacer predicciones.                    |
 | `models/`            | Carpeta que almacena el modelo ya entrenado y serializado.                 |
-| `__pycache__/`       | Cachés automáticos de Python (ignorar).                                    |
 
 ---
 
