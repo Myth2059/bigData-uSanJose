@@ -207,6 +207,8 @@ def limpiar_datos_modelo(df):
         "Trabajo": 8,
     }
     df_limpio["uso"] = df_limpio["uso"].map(usos_cod)
-
+    df_limpio = df_limpio.fillna(9)
+    df_limpio["redes_sociales"] = df_limpio["redes_sociales"].astype(int)
+    df_limpio["uso"] = df_limpio["uso"].astype(int)
     # print(df_limpio.columns.tolist())
     return df_limpio

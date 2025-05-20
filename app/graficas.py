@@ -199,7 +199,7 @@ def graficar_mapa_calor(df):
         ]
     ].copy()
 
-    # 1️ Separar múltiples redes sociales por fila
+    # 1️⃣ Separar múltiples redes sociales por fila
     df_subset["cuáles_redes_sociales_utilizas_con_mayor_frecuencia"] = df_subset[
         "cuáles_redes_sociales_utilizas_con_mayor_frecuencia"
     ].str.split(",")
@@ -208,34 +208,34 @@ def graficar_mapa_calor(df):
         "cuáles_redes_sociales_utilizas_con_mayor_frecuencia"
     ].str.strip()
 
-    # 2️ Eliminar nulos
-    df_subset = df_subset.dropna(
-        subset=[
-            "cuáles_redes_sociales_utilizas_con_mayor_frecuencia",
-            "con_qué_frecuencia_te_sientes_ansioso_después_de_usar_redes_sociales",
-        ]
+    # 2️⃣ Crear tabla cruzada de frecuencias absolutas
+    df_table = pd.crosstab(
+        df_subset["cuáles_redes_sociales_utilizas_con_mayor_frecuencia"],
+        df_subset[
+            "con_qué_frecuencia_te_sientes_ansioso_después_de_usar_redes_sociales"
+        ],
     )
 
-    # 3️ Agrupar y calcular ansiedad promedio por red social
-    df_subset = df_subset.rename(
-        columns={
-            "cuáles_redes_sociales_utilizas_con_mayor_frecuencia": "red_social",
-            "con_qué_frecuencia_te_sientes_ansioso_después_de_usar_redes_sociales": "ansiedad",
-        }
-    )
-    df_subset["ansiedad"] = pd.to_numeric(df_subset["ansiedad"], errors="coerce")
-    ansiedad_promedio = df_subset.groupby("red_social")["ansiedad"].mean().sort_values()
+    # 3️⃣ Calcular porcentajes fila por fila
+    tabla_porcentaje = df_table.div(df_table.sum(axis=1), axis=0) * 100
 
-    # 4️ Crear mapa de calor
+    # 4️⃣ Renombrar filas agregando el total de respuestas (conteo absoluto)
+    total_respuestas = df_table.sum(axis=1)
+    tabla_porcentaje.index = [
+        f"{red} ({total_respuestas[red]})" for red in tabla_porcentaje.index
+    ]
+
+    # 5️⃣ Graficar el heatmap
     plt.figure(figsize=(10, 6))
-    sns.heatmap(
-        ansiedad_promedio.to_frame().T,
-        annot=True,
-        cmap="Reds",
-        cbar_kws={"label": "Ansiedad promedio"},
+    sns.heatmap(tabla_porcentaje, annot=True, cmap="YlOrRd", fmt=".1f")
+
+    plt.title("Porcentaje de niveles de ansiedad según red social usada")
+    plt.xlabel(
+        "Nivel de ansiedad (0=Nunca 1=Casi nunca 2=A veces 3=Casi siempre 4=Siempre)"
     )
-    plt.title("Nivel promedio de ansiedad por red social")
-    plt.yticks([], [])  # Ocultar eje y ya que solo hay una fila
+    plt.ylabel("Redes Sociales")
     plt.tight_layout()
-    print("Ansiedad promedio por red social:\n", ansiedad_promedio)
+    print(
+        "Tabla de porcentaje de ansiedad por red social:\n", tabla_porcentaje.round(1)
+    )
     plt.show()
